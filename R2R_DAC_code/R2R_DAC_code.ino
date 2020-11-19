@@ -10,9 +10,7 @@ void test_run();
 void test_run2();
 
 void setup() {
-  for (int k = 0; k < 4; k++){
-    pinMode(DAC_bus[k], OUTPUT);
-  }
+  DDRB = B00001111;      //Set Pins 8-11 as Inputs
 
 }
 
@@ -34,12 +32,8 @@ void test_run(){
 
 //saw tooth test function
 void test_run2(){
-  for (int i = 0; i < 15; i++){
-    int value = i;
-    for (int k = 0; k < 4; k++){
-      digitalWrite(DAC_bus[k], value%2);
-      value = value/2;
-    }
+  for (int v_level = 0; v_level < 15; v_level++){
+    PORTB = v_level;         
     delay(1);
   }
 }
