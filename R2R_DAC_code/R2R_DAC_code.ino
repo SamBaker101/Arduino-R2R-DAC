@@ -10,8 +10,7 @@ void test_run();
 void test_run2();
 
 void setup() {
-  DDRB = B00001111;      //Set Pins 8-11 as Inputs
-
+  DDRB = B1111;      //Set Pins 8-11 as Inputs
 }
 
 void loop() {
@@ -34,6 +33,6 @@ void test_run(){
 void test_run2(){
   for (int v_level = 0; v_level < 15; v_level++){
     PORTB = v_level;         
-    delay(1);
+    delayMicroseconds(4);
   }
 }
