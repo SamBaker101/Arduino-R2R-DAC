@@ -5,21 +5,24 @@
 
 #define SWITCH_PIN 2         //Push button to switch waveform
 
-#define N 50
+#define N 50                 //Samples per cycle
 
 volatile int switch_state = HIGH;
 
 int table_index = 0;
 int v_level;
 
-int sine_table[50];
-int rsaw_table[50];
-int lsaw_table[50];
-int triangle_table[50];
+//Lookup tables for waveforms
+int sine_table[N];
+int rsaw_table[N];
+int lsaw_table[N];
+int triangle_table[N];
 
 int curr_table = 1;
 
 void timer1_init();
+
+//Function definitions to generate wave tables
 void get_sine_table();
 void get_rsaw_table();
 void get_lsaw_table();
