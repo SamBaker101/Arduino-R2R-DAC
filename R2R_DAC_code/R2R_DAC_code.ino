@@ -16,7 +16,7 @@ uint8_t v_level;
 uint16_t ARR_check = 35;
 
 //Lookup tables for waveforms
-int wave_table[N];
+uint8_t wave_table[N];
 
 uint8_t curr_table = 1;
 
@@ -27,7 +27,6 @@ void get_sine_table();
 void get_rsaw_table();
 void get_lsaw_table();
 void get_triangle_table();
-
 
 void setup() {
   DDRB = B1111;      //Set Pins 8-11 as Inputs
@@ -43,7 +42,7 @@ void setup() {
 }
 
 void loop(){
-  ARR_check = analogRead(FREQ)+35;
+  ARR_check = int(((analogRead(FREQ)*760.0)/1023)+40);
   if (abs(ARR_check - OCR1A) > 25){
     OCR1A = ARR_check;  
     }
@@ -57,7 +56,7 @@ void timer1_init(){
   TCCR1B = 0;
   TCNT1  = 0;
 
-  OCR1A = 35;               //Compare Value
+  OCR1A = 40;               //Compare Value
   TCCR1B |= (1 << WGM12);    // CTC mode
   TCCR1B |= (1<<CS11);       // 8 prescaler 
   TIMSK1 |= (1 << OCIE1A);   // enable timer compare interrupt
